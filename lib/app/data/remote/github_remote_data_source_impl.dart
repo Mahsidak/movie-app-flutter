@@ -9,10 +9,10 @@ import '/app/network/dio_provider.dart';
 class GithubRemoteDataSourceImpl extends BaseRemoteSource
     implements GithubRemoteDataSource {
   @override
-  Future<GithubProjectSearchResponse> searchGithubProject(
+  Future<MovieListResponse> searchGithubProject(
       GithubSearchQueryParam queryParam) {
-    var endpoint = "${DioProvider.baseUrl}/search/repositories";
-    var dioCall = dioClient.get(endpoint, queryParameters: queryParam.toJson());
+    var endpoint = "https://yts.mx/api/v2/list_movies.json?sort_by=popular&order_by=desc&limit=2";
+    var dioCall = dioClient.get(endpoint);
 
     try {
       return callApiWithErrorParser(dioCall)
@@ -22,25 +22,8 @@ class GithubRemoteDataSourceImpl extends BaseRemoteSource
     }
   }
 
-  @override
-  Future<Item> getGithubProjectDetails(String userName, String repositoryName) {
-    var endpoint = "${DioProvider.baseUrl}/repos/$userName/$repositoryName";
-    var dioCall = dioClient.get(endpoint);
-
-    try {
-      return callApiWithErrorParser(dioCall)
-          .then((response) => _parseGithubProjectResponse(response));
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  GithubProjectSearchResponse _parseGithubProjectSearchResponse(
+  MovieListResponse _parseGithubProjectSearchResponse(
       Response<dynamic> response) {
-    return GithubProjectSearchResponse.fromJson(response.data);
-  }
-
-  Item _parseGithubProjectResponse(Response<dynamic> response) {
-    return Item.fromJson(response.data);
+    return MovieListResponse.fromJson(response.data);
   }
 }

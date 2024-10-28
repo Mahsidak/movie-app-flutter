@@ -50,29 +50,8 @@ class HomeController extends BaseController {
     getMovieList();
   }
 
-  void _handleProjectListResponseSuccess(GithubProjectSearchResponse response) {
-    List<GithubProjectUiData>? repoList = response.items
-        ?.map((e) => GithubProjectUiData(
-              repositoryName: e.name != null ? e.name! : "Null",
-              ownerLoginName: e.owner != null ? e.owner!.login! : "Null",
-              ownerAvatar: e.owner != null ? e.owner!.avatarUrl! : "",
-              numberOfStar: e.stargazersCount ?? 0,
-              numberOfFork: e.forks ?? 0,
-              score: e.score ?? 0.0,
-              watchers: e.watchers ?? 0,
-              description: e.description ?? "",
-            ))
-        .toList();
-
-    if (_isLastPage(repoList!.length, response.totalCount!)) {
-      pagingController.appendLastPage(repoList);
-    } else {
-      pagingController.appendPage(repoList);
-    }
-
-    var newList = [...pagingController.listItems];
-
-    _githubProjectListController(newList);
+  void _handleProjectListResponseSuccess(MovieListResponse response) {
+    print(response.data.movies.first.title);
   }
 
   bool _isLastPage(int newListItemCount, int totalCount) {
