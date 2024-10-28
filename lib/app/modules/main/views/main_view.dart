@@ -8,7 +8,6 @@ import '/app/modules/home/views/home_view.dart';
 import '/app/modules/main/controllers/main_controller.dart';
 import '/app/modules/main/model/menu_code.dart';
 import '/app/modules/main/views/bottom_nav_bar.dart';
-import '/app/modules/other/views/other_view.dart';
 import '/app/modules/settings/views/settings_view.dart';
 import '/app/modules/search/views/search_view.dart';
 
@@ -49,9 +48,7 @@ class MainView extends BaseView<MainController> {
         settingsView ??= SettingsView();
         return settingsView!;
       default:
-        return OtherView(
-          viewParam: describeEnum(menuCode),
-        );
+        return homeView;
     }
   }
 }
