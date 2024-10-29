@@ -33,11 +33,11 @@ class HomeView extends BaseView<HomeController> {
         child: Obx(
           () => ListView.separated(
             shrinkWrap: true,
-            itemCount: controller.projectList.length,
+            itemCount: controller.movieList.length,
             primary: false,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              var model = controller.projectList[index];
+              var model = controller.movieList[index];
 
               return ItemGithubProject(dataModel: model);
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/core/widget/ripple.dart';
+import 'package:flutter_getx_template/app/data/model/movie_list_response.dart';
 import 'package:get/get.dart';
 
 import '/app/core/base/base_widget_mixin.dart';
@@ -12,7 +13,7 @@ import '/app/modules/home/model/github_project_ui_data.dart';
 import '/app/routes/app_pages.dart';
 
 class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
-  final GithubProjectUiData dataModel;
+  final Movie dataModel;
 
   ItemGithubProject({
     Key? key,
@@ -31,7 +32,7 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(dataModel.ownerAvatar),
+
                 radius: AppValues.circularImageSize_30,
               ),
               const SizedBox(width: AppValues.margin_10),
@@ -49,48 +50,14 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            dataModel.repositoryName,
+            dataModel.title ?? '',
             style: cardTitleStyle,
             overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+            maxLines: 2,
           ),
           const SizedBox(height: AppValues.margin_4),
-          Text(
-            dataModel.ownerLoginName,
-            style: cardSubtitleStyle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: AppValues.margin_4),
-          _getForkStarWatcherView(),
         ],
       ),
-    );
-  }
-
-  Widget _getForkStarWatcherView() {
-    return Row(
-      children: [
-        IconTextWidget(
-          fileName: "ic_fork.svg",
-          value: dataModel.numberOfFork.toString(),
-          height: AppValues.iconSize_20,
-          width: AppValues.iconSize_20,
-          color: AppColors.iconColorDefault,
-        ),
-        IconTextWidget(
-          icon: Icons.star_border,
-          value: dataModel.numberOfStar.toString(),
-          size: AppValues.iconSize_20,
-          color: AppColors.iconColorDefault,
-        ),
-        IconTextWidget(
-          icon: Icons.visibility_outlined,
-          value: dataModel.watchers.toString(),
-          size: AppValues.iconSize_20,
-          color: AppColors.iconColorDefault,
-        ),
-      ],
     );
   }
 

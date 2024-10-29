@@ -3,21 +3,17 @@ import 'package:get/get.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/base/paging_controller.dart';
 import '/app/core/model/github_search_query_param.dart';
-import '/app/data/model/github_project_search_response.dart';
+import '/app/data/model/movie_list_response.dart';
 import '/app/data/repository/github_repository.dart';
 import '/app/modules/home/model/github_project_ui_data.dart';
 
 class HomeController extends BaseController {
   final GithubRepository _repository =
-      Get.find(tag: (GithubRepository).toString());
-
-  final RxList<GithubProjectUiData> _githubProjectListController =
-      RxList.empty();
-
-  List<GithubProjectUiData> get projectList =>
-      _githubProjectListController.toList();
+  Get.find(tag: (GithubRepository).toString());
 
   final pagingController = PagingController<GithubProjectUiData>();
+
+  final RxList<Movie> movieList = <Movie>[].obs;
 
   void getMovieList() {
     if (!pagingController.canLoadNextPage()) return;
@@ -51,10 +47,6 @@ class HomeController extends BaseController {
   }
 
   void _handleProjectListResponseSuccess(MovieListResponse response) {
-    print(response.data.movies.first.title);
-  }
-
-  bool _isLastPage(int newListItemCount, int totalCount) {
-    return (projectList.length + newListItemCount) >= totalCount;
+    movieList.addAll(response.data.movies);
   }
 }
