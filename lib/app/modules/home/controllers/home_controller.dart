@@ -13,7 +13,7 @@ class HomeController extends BaseController {
 
   final pagingController = PagingController<GithubProjectUiData>();
 
-  final RxList<Movie> movieList = <Movie>[].obs;
+  final RxList<MovieData> movieList = <MovieData>[].obs;
 
   void getMovieList() {
     if (!pagingController.canLoadNextPage()) return;
@@ -46,7 +46,7 @@ class HomeController extends BaseController {
     getMovieList();
   }
 
-  void _handleProjectListResponseSuccess(MovieListResponse response) {
-    movieList.addAll(response.data.movies);
+  void _handleProjectListResponseSuccess(TrendingMoviesResponse response) {
+    movieList.addAll(response.results);
   }
 }

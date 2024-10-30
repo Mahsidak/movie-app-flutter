@@ -10,7 +10,7 @@ class GithubRepositoryImpl implements GithubRepository {
       Get.find(tag: (GithubRemoteDataSource).toString());
 
   @override
-  Future<MovieListResponse> searchProject(
+  Future<TrendingMoviesResponse> searchProject(
       GithubSearchQueryParam queryParam) {
     return _remoteSource.searchGithubProject(queryParam);
   }

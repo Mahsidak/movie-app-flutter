@@ -13,7 +13,7 @@ import '/app/modules/home/model/github_project_ui_data.dart';
 import '/app/routes/app_pages.dart';
 
 class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
-  final Movie dataModel;
+  final MovieData dataModel;
 
   ItemGithubProject({
     Key? key,
@@ -50,7 +50,7 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            dataModel.title ?? '',
+            dataModel.title ?? dataModel.name ?? '',
             style: cardTitleStyle,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
@@ -65,3 +65,4 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
     Get.toNamed(Routes.PROJECT_DETAILS, arguments: dataModel);
   }
 }
+//https://image.tmdb.org/t/p/w500

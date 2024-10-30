@@ -8,9 +8,9 @@ import '/app/data/remote/github_remote_data_source.dart';
 class GithubRemoteDataSourceImpl extends BaseRemoteSource
     implements GithubRemoteDataSource {
   @override
-  Future<MovieListResponse> searchGithubProject(
+  Future<TrendingMoviesResponse> searchGithubProject(
       GithubSearchQueryParam queryParam) {
-    var endpoint = "https://yts.mx/api/v2/list_movies.json?sort_by=popular&order_by=desc&limit=2";
+    var endpoint = "https://api.themoviedb.org/3/trending/all/day?api_key=3416755058040f4da2f7205c914e9a9d";
     var dioCall = dioClient.get(endpoint);
     try {
       return callApiWithErrorParser(dioCall)
@@ -22,8 +22,8 @@ class GithubRemoteDataSourceImpl extends BaseRemoteSource
     }
   }
 
-  MovieListResponse _parseGithubProjectSearchResponse(
+  TrendingMoviesResponse _parseGithubProjectSearchResponse(
       Response<dynamic> response) {
-    return MovieListResponse.fromJson(response.data);
+    return TrendingMoviesResponse.fromJson(response.data);
   }
 }
