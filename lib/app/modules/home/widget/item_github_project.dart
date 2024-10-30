@@ -4,12 +4,8 @@ import 'package:flutter_getx_template/app/data/model/movie_list_response.dart';
 import 'package:get/get.dart';
 
 import '/app/core/base/base_widget_mixin.dart';
-import '/app/core/values/app_colors.dart';
 import '/app/core/values/app_values.dart';
-import '/app/core/values/text_styles.dart';
 import '/app/core/widget/elevated_container.dart';
-import '/app/core/widget/icon_text_widgets.dart';
-import '/app/modules/home/model/github_project_ui_data.dart';
 import '/app/routes/app_pages.dart';
 
 class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
@@ -29,34 +25,36 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
           padding: const EdgeInsets.all(AppValues.padding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-
-                radius: AppValues.circularImageSize_30,
+              // Poster image from URL
+              Image.network(
+                'https://image.tmdb.org/t/p/w500${dataModel.posterPath}',
+                width: 100,
+                height: 150,
+                fit: BoxFit.cover,
               ),
-              const SizedBox(width: AppValues.margin_10),
-              _getDetailsView(),
+              SizedBox(width: 17),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      dataModel.title ?? dataModel.name ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _getDetailsView() {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            dataModel.title ?? dataModel.name ?? '',
-            style: cardTitleStyle,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
-          const SizedBox(height: AppValues.margin_4),
-        ],
       ),
     );
   }

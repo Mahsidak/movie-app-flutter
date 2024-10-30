@@ -26,9 +26,9 @@ class ElevatedContainer extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: AppColors.elevatedContainerColorOpacity,
-              spreadRadius: 3,
-              blurRadius: 8,
-              offset: const Offset(0, 3), // changes position of shadow
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: const Offset(0, 0),
             ),
           ],
           color: AppColors.pageBackground),
