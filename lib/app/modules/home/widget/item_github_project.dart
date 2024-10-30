@@ -27,14 +27,13 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Poster image from URL
               Image.network(
                 'https://image.tmdb.org/t/p/w500${dataModel.posterPath}',
-                width: 100,
-                height: 150,
+                width: AppValues.height_100,
+                height: AppValues.width_150,
                 fit: BoxFit.cover,
               ),
-              SizedBox(width: 17),
+              SizedBox(width: AppValues.width_16),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +45,17 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16.0,
+                        fontSize: AppValues.font_16,
+                      ),
+                    ),
+                    SizedBox(height: AppValues.padding),
+                    Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: AppValues.margin_12,
                       ),
                     ),
                   ],
@@ -63,4 +72,3 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
     Get.toNamed(Routes.PROJECT_DETAILS, arguments: dataModel);
   }
 }
-//https://image.tmdb.org/t/p/w500

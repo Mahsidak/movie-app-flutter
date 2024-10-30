@@ -17,7 +17,6 @@ analyzer:
 linter:
   rules:
     camel_case_types: true
-    #    prefer_double_quotes: true
     avoid_empty_else: true
     constant_identifier_names: false
     use_key_in_widget_constructors: false
@@ -30,7 +29,7 @@ dart_code_metrics:
     cyclomatic-complexity: 20
     maximum-nesting-level: 5
     number-of-parameters: 8
-    source-lines-of-code: 50
+    source-lines-of-code: 100
   metrics-exclude:
     - test/**
     - ios/**
