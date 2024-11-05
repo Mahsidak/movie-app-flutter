@@ -44,7 +44,6 @@ class ItemGithubProject extends StatelessWidget {
               SizedBox(width: AppValues.padding),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
@@ -62,8 +61,7 @@ class ItemGithubProject extends StatelessWidget {
                         ),
                         SizedBox(height: AppValues.padding),
                         Text(
-                          //dataModel.description ?? 'No description available.',
-                          'dbasjdgasi',
+                          dataModel.description ?? 'No description available.',
                           style: TextStyle(
                             fontSize: AppValues.font_14,
                             color: Colors.grey[300],
@@ -73,6 +71,7 @@ class ItemGithubProject extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: AppValues.padding),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
