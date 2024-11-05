@@ -97,8 +97,9 @@ abstract class AppValues {
 
   static const double height_16 = 16;
 
-  static const double height_100 = 100;
-  static const double width_150 = 150;
+  static const double height_150 = 150;
+  static const double width_100 = 100;
+  static const double font_14 = 14;
   static const double font_16 = 16;
   static const double width_16 = 16;
 }

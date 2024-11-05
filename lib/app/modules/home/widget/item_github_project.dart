@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_template/app/core/widget/ripple.dart';
+import 'package:flutter_getx_template/app/core/values/app_values.dart';
 import 'package:flutter_getx_template/app/data/model/movie_list_response.dart';
 import 'package:get/get.dart';
-
-import '/app/core/base/base_widget_mixin.dart';
-import '/app/core/values/app_values.dart';
-import '/app/core/widget/elevated_container.dart';
 import '/app/routes/app_pages.dart';
 
-class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
+class ItemGithubProject extends StatelessWidget {
   final MovieData dataModel;
 
   ItemGithubProject({
@@ -16,47 +12,79 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
     required this.dataModel,
   }) : super(key: key);
 
+  void _onTap() {
+    Get.toNamed(Routes.PROJECT_DETAILS, arguments: dataModel);
+  }
+
   @override
-  Widget body(BuildContext context) {
-    return ElevatedContainer(
-      child: Ripple(
-        onTap: _onTap,
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _onTap,
+      child: Card(
+        color: Colors.grey[900],
+        margin: EdgeInsets.all(8.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppValues.margin_10),
+        ),
+        elevation: 4,
         child: Padding(
-          padding: const EdgeInsets.all(AppValues.padding),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                'https://image.tmdb.org/t/p/w500${dataModel.posterPath}',
-                width: AppValues.height_100,
-                height: AppValues.width_150,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w500${dataModel.posterPath}',
+                  height: AppValues.height_150,
+                  width: AppValues.width_100,
+                  fit: BoxFit.cover,
+                ),
               ),
-              SizedBox(width: AppValues.width_16),
+              SizedBox(width: AppValues.padding),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       dataModel.title ?? dataModel.name ?? '',
+                      style: TextStyle(
+                        fontSize: AppValues.font_16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: AppValues.font_16,
-                      ),
                     ),
                     SizedBox(height: AppValues.padding),
                     Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint',
+                      'dsjflsdhfsdhdhflkh',
+                      style: TextStyle(
+                        fontSize: AppValues.font_14,
+                        color: Colors.grey[300],
+                      ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: AppValues.margin_12,
-                      ),
+                    ),
+                    SizedBox(height: AppValues.padding),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Year: ${dataModel.releaseDate ?? ''}",
+                          style: TextStyle(fontSize: AppValues.font_14, color: Colors.white),
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.star, color: Colors.amber, size: AppValues.font_14),
+                            SizedBox(width: 4),
+                            Text(
+                              "${dataModel.voteAverage}",
+                              style: TextStyle(fontSize: AppValues.font_14, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -66,9 +94,5 @@ class ItemGithubProject extends StatelessWidget with BaseWidgetMixin {
         ),
       ),
     );
-  }
-
-  void _onTap() {
-    Get.toNamed(Routes.PROJECT_DETAILS, arguments: dataModel);
   }
 }
