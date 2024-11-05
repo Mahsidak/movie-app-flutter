@@ -1,38 +1,23 @@
+import 'package:flutter_getx_template/app/data/remote/api_service_logic.dart';
 import 'package:get/get.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/base/paging_controller.dart';
-import '/app/core/model/github_search_query_param.dart';
 import '/app/data/model/movie_list_response.dart';
-import '/app/data/repository/github_repository.dart';
 import '/app/modules/home/model/github_project_ui_data.dart';
 
 class HomeController extends BaseController {
-  final GithubRepository _repository =
-  Get.find(tag: (GithubRepository).toString());
-
   final pagingController = PagingController<GithubProjectUiData>();
 
   final RxList<MovieData> movieList = <MovieData>[].obs;
 
   void getMovieList() {
-    if (!pagingController.canLoadNextPage()) return;
-
-    pagingController.isLoadingPage = true;
-
-    var queryParam = GithubSearchQueryParam(
-      searchKeyWord: 'flutter getx template',
-      pageNumber: pagingController.pageNumber,
-    );
-
-    var githubRepoSearchService = _repository.searchProject(queryParam);
+    var response = APIServiceLogic.sharedInstance.fetchTrendingMovies();
 
     callDataService(
-      githubRepoSearchService,
+      response,
       onSuccess: _handleProjectListResponseSuccess,
     );
-
-    pagingController.isLoadingPage = false;
   }
 
   onRefreshPage() {
