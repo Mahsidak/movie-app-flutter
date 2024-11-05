@@ -44,29 +44,35 @@ class ItemGithubProject extends StatelessWidget {
               SizedBox(width: AppValues.padding),
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      dataModel.title ?? dataModel.name ?? '',
-                      style: TextStyle(
-                        fontSize: AppValues.font_16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          dataModel.title ?? dataModel.name ?? '',
+                          style: TextStyle(
+                            fontSize: AppValues.font_16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: AppValues.padding),
+                        Text(
+                          //dataModel.description ?? 'No description available.',
+                          'dbasjdgasi',
+                          style: TextStyle(
+                            fontSize: AppValues.font_14,
+                            color: Colors.grey[300],
+                          ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: AppValues.padding),
-                    Text(
-                      'dsjflsdhfsdhdhflkh',
-                      style: TextStyle(
-                        fontSize: AppValues.font_14,
-                        color: Colors.grey[300],
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: AppValues.padding),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
