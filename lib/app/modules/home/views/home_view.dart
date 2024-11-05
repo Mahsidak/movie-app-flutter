@@ -39,7 +39,7 @@ class HomeView extends BaseView<HomeController> {
             itemBuilder: (context, index) {
               var model = controller.movieList[index];
 
-              return ItemGithubProject(dataModel: model);
+              return MovieCard(dataModel: model);
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: AppValues.smallMargin),

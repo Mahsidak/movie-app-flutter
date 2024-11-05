@@ -4,10 +4,10 @@ import 'package:flutter_getx_template/app/data/model/movie_list_response.dart';
 import 'package:get/get.dart';
 import '/app/routes/app_pages.dart';
 
-class ItemGithubProject extends StatelessWidget {
+class MovieCard extends StatelessWidget {
   final MovieData dataModel;
 
-  ItemGithubProject({
+  MovieCard({
     Key? key,
     required this.dataModel,
   }) : super(key: key);
