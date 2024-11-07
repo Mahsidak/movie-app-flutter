@@ -16,6 +16,7 @@ class HomeView extends BaseView<HomeController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
       appBarTitleText: 'Movies',
+      isBackButtonEnabled: false,
     );
   }
 

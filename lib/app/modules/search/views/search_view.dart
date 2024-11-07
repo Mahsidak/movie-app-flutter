@@ -13,6 +13,7 @@ class SearchView extends BaseView<SearchPageController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
       appBarTitleText: 'Search',
+      isBackButtonEnabled: false,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../modules/login/views/login_view.dart';
 import '/app/modules/bookmarks/bindings/bookmarks_binding.dart';
 import '/app/modules/bookmarks/views/bookmarks_view.dart';
 import '/app/modules/home/bindings/home_binding.dart';
@@ -14,9 +15,14 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MAIN;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginPage(),
+      binding: MainBinding(),
+    ),
     GetPage(
       name: _Paths.MAIN,
       page: () => MainView(),

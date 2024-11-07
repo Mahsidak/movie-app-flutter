@@ -10,6 +10,7 @@ class BookmarksView extends BaseView<BookmarksController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
       appBarTitleText: 'Bookmarks',
+      isBackButtonEnabled: false,
     );
   }
 
