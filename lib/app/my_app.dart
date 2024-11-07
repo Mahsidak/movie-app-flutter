@@ -20,32 +20,42 @@ class _MovieAppState extends State<MovieApp> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: _envConfig.appName,
-      initialRoute: AppPages.INITIAL,
-      initialBinding: InitialBinding(),
-      getPages: AppPages.routes,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: _getSupportedLocal(),
-      theme: ThemeData(
-        primarySwatch: AppColors.colorPrimarySwatch,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        brightness: Brightness.light,
-        primaryColor: AppColors.colorPrimary,
-        textTheme: const TextTheme(
-          labelLarge: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      behavior: HitTestBehavior.opaque,
+      child: GetMaterialApp(
+        title: _envConfig.appName,
+        initialRoute: AppPages.INITIAL,
+        initialBinding: InitialBinding(),
+        getPages: AppPages.routes,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: _getSupportedLocales(),
+        theme: ThemeData(
+          primarySwatch: AppColors.colorPrimarySwatch,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          brightness: Brightness.light,
+          primaryColor: AppColors.colorPrimary,
+          textTheme: const TextTheme(
+            labelLarge: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.black12,
+            cursorColor: Colors.black,
+          ),
+          fontFamily: 'Roboto',
         ),
-        fontFamily: 'Roboto',
+        debugShowCheckedModeBanner: false,
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 
-  List<Locale> _getSupportedLocal() {
+  List<Locale> _getSupportedLocales() {
     return [
       const Locale('en', ''),
       const Locale('bn', ''),

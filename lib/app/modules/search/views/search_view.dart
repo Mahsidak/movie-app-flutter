@@ -6,6 +6,9 @@ import '/app/core/base/base_view.dart';
 import '../controllers/search_controller.dart';
 
 class SearchView extends BaseView<SearchPageController> {
+
+  String previousSearchedInput = '';
+
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
@@ -16,40 +19,45 @@ class SearchView extends BaseView<SearchPageController> {
   @override
   Widget body(BuildContext context) {
     return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            cursorColor: Colors.black,
-            onSubmitted: (value) {
-              controller.searchMovies(value);
-            },
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.black),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              cursorColor: Colors.black,
+              onSubmitted: (value) {
+                if (value != previousSearchedInput && value != '') {
+                  controller.searchMovies(value);
+                  previousSearchedInput = value;
+                }
+              },
+              decoration: InputDecoration(
+                hintText: 'Search movies',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                filled: true,
+                fillColor: Colors.white,
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              filled: true,
-              fillColor: Colors.white,
+              style: TextStyle(color: Colors.black),
             ),
-            style: TextStyle(color: Colors.black),
           ),
-        ),
-        Expanded(
-          child: Obx(() => ListView.builder(
-            itemCount: controller.movieList.length,
-            itemBuilder: (context, index) {
-              final model = controller.movieList[index];
+          Expanded(
+            child: Obx(() =>
+                ListView.builder(
+                  itemCount: controller.movieList.length,
+                  itemBuilder: (context, index) {
+                    final model = controller.movieList[index];
 
-              return MovieCard(dataModel: model);
-            },
-          )),
-        ),
-      ],
-    );
+                    return MovieCard(dataModel: model);
+                  },
+                )),
+          ),
+        ],
+      );
   }
 }
