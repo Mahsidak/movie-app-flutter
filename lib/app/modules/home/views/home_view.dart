@@ -28,22 +28,19 @@ class HomeView extends BaseView<HomeController> {
       onLoadNextPage: () {
         controller.onLoadNextPage();
       },
-      child: Padding(
-        padding: const EdgeInsets.all(AppValues.padding),
-        child: Obx(
-          () => ListView.separated(
-            shrinkWrap: true,
-            itemCount: controller.movieList.length,
-            primary: false,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              var model = controller.movieList[index];
+      child: Obx(
+        () => ListView.separated(
+          shrinkWrap: true,
+          itemCount: controller.movieList.length,
+          primary: false,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            var model = controller.movieList[index];
 
-              return MovieCard(dataModel: model);
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(height: AppValues.smallMargin),
-          ),
+            return MovieCard(dataModel: model);
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const SizedBox(height: AppValues.margin_zero),
         ),
       ),
     );
