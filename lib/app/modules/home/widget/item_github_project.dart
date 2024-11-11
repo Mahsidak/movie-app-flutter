@@ -13,7 +13,7 @@ class MovieCard extends StatelessWidget {
   }) : super(key: key);
 
   void _onTap() {
-    Get.toNamed(Routes.PROJECT_DETAILS, arguments: dataModel);
+    Get.toNamed(Routes.MOVIE_DETAILS, arguments: dataModel);
   }
 
   @override

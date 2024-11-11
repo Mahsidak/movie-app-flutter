@@ -31,7 +31,7 @@ class HomeController extends BaseController {
     getMovieList();
   }
 
-  void _handleProjectListResponseSuccess(TrendingMoviesResponse response) {
+  void _handleProjectListResponseSuccess(MoviesResponse response) {
     movieList.addAll(response.results);
   }
 }

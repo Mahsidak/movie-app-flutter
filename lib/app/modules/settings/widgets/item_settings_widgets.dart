@@ -33,7 +33,7 @@ class ItemSettings extends StatelessWidget with BaseWidgetMixin {
               width: AppValues.iconSize_20,
             ),
             const SizedBox(width: AppValues.smallPadding),
-            Text(title, style: settingsItemStyle),
+            Text(title, style: settingsItemStyle , ),
             const Spacer(),
             AssetImageView(
               fileName: suffixImage,

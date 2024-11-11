@@ -16,7 +16,7 @@ class SearchPageController extends BaseController {
     );
   }
 
-  void _handleProjectListResponseSuccess(TrendingMoviesResponse response) {
+  void _handleProjectListResponseSuccess(MoviesResponse response) {
     movieList.clear();
     movieList.addAll(response.results);
   }

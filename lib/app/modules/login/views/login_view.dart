@@ -23,7 +23,7 @@ class LoginPage extends BaseView<HomeController> {
               },
               child: Text("Sign in with Google"),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50), // Full-width button
+                minimumSize: Size(double.infinity, 50),
                 padding: EdgeInsets.symmetric(vertical: 16),
                 textStyle: TextStyle(fontSize: 18),
               ),

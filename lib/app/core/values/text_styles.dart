@@ -122,6 +122,7 @@ const titleStyle = TextStyle(
 
 const settingsItemStyle = TextStyle(
   fontSize: 16,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
 );
 

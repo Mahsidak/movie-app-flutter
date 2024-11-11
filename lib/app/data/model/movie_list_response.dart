@@ -1,11 +1,11 @@
-class TrendingMoviesResponse {
+class MoviesResponse {
   final int page;
   final List<MovieData> results;
 
-  TrendingMoviesResponse.MovieListResponse({required this.page, required this.results});
+  MoviesResponse.MovieListResponse({required this.page, required this.results});
 
-  factory TrendingMoviesResponse.fromJson(Map<String, dynamic> json) {
-    return TrendingMoviesResponse.MovieListResponse(
+  factory MoviesResponse.fromJson(Map<String, dynamic> json) {
+    return MoviesResponse.MovieListResponse(
       page: json['page'],
       results: (json['results'] as List).map((item) => MovieData.fromJson(item)).toList(),
     );
