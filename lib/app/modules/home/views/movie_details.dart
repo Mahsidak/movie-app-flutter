@@ -88,14 +88,14 @@ class MovieDetailsView extends BaseView<MovieDetailsController> {
             left: 16.0,
             right: 16.0,
             bottom: 30.0,
-            child: _buildAddToWatchListButton(),
+            child: bookmarksButton(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildAddToWatchListButton() {
+  Widget bookmarksButton() {
     return Container(
       width: double.infinity,
       height: 50,
@@ -124,10 +124,6 @@ class MovieDetailsView extends BaseView<MovieDetailsController> {
     //     _showSuccessDialog();
     //   }
     // });
-    print('Add to Favourite clicked');
-  }
-
-  String _getUrlFromData(String posterPath) {
-    return "https://image.tmdb.org/t/p/w500$posterPath";
+    controller.addToFavourite();
   }
 }

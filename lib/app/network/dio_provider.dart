@@ -63,15 +63,4 @@ class DioProvider {
     _instance!.interceptors.add(_prettyDioLogger);
   }
 
-  static String _buildContentType(String version) {
-    return "user_defined_content_type+$version";
-  }
-
-  DioProvider.setContentType(String version) {
-    _instance?.options.contentType = _buildContentType(version);
-  }
-
-  DioProvider.setContentTypeApplicationJson() {
-    _instance?.options.contentType = "application/json";
-  }
 }

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../data/model/MovieBookmarkRequest.dart';
+import '../../../data/model/movie_bookmark_request.dart';
 import '../../../data/model/movie_list_response.dart';
 import '../../../data/remote/api_service_logic.dart';
 import '/app/core/base/base_controller.dart';

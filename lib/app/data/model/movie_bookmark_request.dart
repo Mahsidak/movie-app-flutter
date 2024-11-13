@@ -6,9 +6,9 @@ class MovieBookmarkRequest {
   bool favorite;
 
   MovieBookmarkRequest({
-    required this.mediaId,
+    this.mediaId = '',
     this.mediaType = "movie",
-    required this.favorite
+    this.favorite = false
   });
 
   Map<String, dynamic> toJson() {

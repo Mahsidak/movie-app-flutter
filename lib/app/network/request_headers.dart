@@ -10,7 +10,11 @@ class RequestHeaderInterceptor extends InterceptorsWrapper {
   }
 
   Future<Map<String, String>> getCustomHeaders() async {
-    var customHeaders = {'content-type': 'application/json'};
+
+    var customHeaders = {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDE2NzU1MDU4MDQwZjRkYTJmNzIwNWM5MTRlOWE5ZCIsIm5iZiI6MTczMTMzMzQzMi43MTE1MjIsInN1YiI6IjY0MzNlNGRmNmRlYTNhMDBmMzk4N2U0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.D_ucdiQmtRZ0dKXpoHoikiMPIM9tJw0dXKeJL2im7lM'
+    };
 
     return customHeaders;
   }

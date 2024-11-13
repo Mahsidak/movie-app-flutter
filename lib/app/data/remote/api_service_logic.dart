@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_getx_template/app/data/model/movie_bookmark_response.dart';
 
-import '../model/MovieBookmarkRequest.dart';
+import '../model/movie_bookmark_request.dart';
 import '/app/core/base/base_remote_source.dart';
 import '/app/data/model/movie_list_response.dart';
 
@@ -35,14 +36,22 @@ class APIServiceLogic extends BaseRemoteSource {
     }
   }
 
-  Future<MoviesResponse> bookmarkMovie(MovieBookmarkRequest queryParam) {
+  Future<MovieBookmarkResponse> bookmarkMovie(MovieBookmarkRequest queryParam) {
     var endpoint = "https://api.themoviedb.org/3/account/18829666/favorite";
-    var dioCall = dioClient.post(endpoint, queryParameters: queryParam.toJson());
+
+    var headers = {
+      "accept": "application/json",
+      "Authorization": "Bearer 3416755058040f4da2f7205c914e9a9d"
+    };
+
+    var options = Options(headers: headers);
+
+    var dioCall = dioClient.post(endpoint, queryParameters: queryParam.toJson(), options: options);
 
     try {
       return callApiWithErrorParser(dioCall)
           .then((response) {
-        return MoviesResponse.fromJson(response.data);
+        return MovieBookmarkResponse.fromJson(response.data);
       });
     } catch (e) {
       rethrow;
