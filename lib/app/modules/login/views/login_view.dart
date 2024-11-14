@@ -21,7 +21,7 @@ class LoginPage extends BaseView<HomeController> {
               onPressed: () {
                 Get.to(() => MainView());
               },
-              child: Text("Sign in with Google"),
+              child: Text("Continue"),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
                 padding: EdgeInsets.symmetric(vertical: 16),
