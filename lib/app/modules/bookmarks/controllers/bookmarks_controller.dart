@@ -7,6 +7,16 @@ import '/app/core/base/base_controller.dart';
 class BookmarksController extends BaseController {
   final RxList<MovieData> movieList = RxList.empty();
 
+  onRefreshPage() {
+    getBookmarkedMovies();
+  }
+
+  onLoadNextPage() {
+    logger.i("On load next");
+
+    getBookmarkedMovies();
+  }
+
   void getBookmarkedMovies() {
     var response = APIServiceLogic.sharedInstance.getBookmarkedMovies();
     callDataService(
