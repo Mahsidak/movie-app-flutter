@@ -5,9 +5,10 @@ import '../../network/serviceHandler/api_service.dart';
 import '../model/movie_bookmark_request.dart';
 import '../model/movie_bookmark_response.dart';
 import '/app/data/model/movie_list_response.dart';
+import 'data_source.dart';
 
-class APIServiceLogic {
-  static APIServiceLogic sharedInstance = APIServiceLogic();
+class DataSourceImplementation extends DataSource {
+  static DataSource sharedInstance = DataSourceImplementation();
 
   Future<MoviesResponse> fetchTrendingMovies() async {
     var endpoint =

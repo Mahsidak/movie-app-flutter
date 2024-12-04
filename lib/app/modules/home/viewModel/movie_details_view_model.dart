@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_getx_template/app/data/model/movie_bookmark_response.dart';
 import 'package:flutter_getx_template/app/data/model/movie_list_response.dart';
-import 'package:flutter_getx_template/app/data/remote/api_service_logic.dart';
+import 'package:flutter_getx_template/app/data/remote/data_source_implementation.dart';
 
 import '../../../data/model/movie_bookmark_request.dart';
 
@@ -17,7 +17,7 @@ class MovieDetailsViewModel {
       params.mediaId = movieDetails.id.toString();
       params.favorite = true;
 
-      MovieBookmarkResponse response = await APIServiceLogic.sharedInstance.bookmarkMovie(params);
+      MovieBookmarkResponse response = await DataSourceImplementation.sharedInstance.bookmarkMovie(params);
 
       _handleBookmarkResponseSuccess(response);
     } catch (error) {

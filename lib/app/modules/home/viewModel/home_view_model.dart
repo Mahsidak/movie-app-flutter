@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_getx_template/app/data/remote/api_service_logic.dart';
+import 'package:flutter_getx_template/app/data/remote/data_source_implementation.dart';
 
 import '/app/core/base/paging_controller.dart';
 import '/app/data/model/movie_list_response.dart';
@@ -12,7 +12,7 @@ class HomeViewModel {
 
   Future<void> getMovieList() async {
     try {
-      var response = await APIServiceLogic.sharedInstance.fetchTrendingMovies();
+      var response = await DataSourceImplementation.sharedInstance.fetchTrendingMovies();
       print(response);
       _handleProjectListResponseSuccess(response);
     } catch (e) {
