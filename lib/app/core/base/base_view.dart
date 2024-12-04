@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -11,11 +10,8 @@ import '/app/core/values/app_colors.dart';
 import '/app/core/widget/loading.dart';
 import '/flavors/build_config.dart';
 
-abstract class BaseView<Controller extends BaseController>
-    extends GetView<Controller> {
+abstract class BaseView<Controller extends BaseController> {
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
-
-  AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
   final Logger logger = BuildConfig.instance.config.logger;
 
@@ -29,12 +25,6 @@ abstract class BaseView<Controller extends BaseController>
       child: Stack(
         children: [
           annotatedRegion(context),
-          Obx(() => controller.pageState == PageState.LOADING
-              ? _showLoading()
-              : Container()),
-          Obx(() => controller.errorMessage.isNotEmpty
-              ? showErrorSnackBar(controller.errorMessage)
-              : Container()),
           Container(),
         ],
       ),
@@ -72,15 +62,6 @@ abstract class BaseView<Controller extends BaseController>
     return SafeArea(
       child: body(context),
     );
-  }
-
-  Widget showErrorSnackBar(String message) {
-    final snackBar = SnackBar(content: Text(message));
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      ScaffoldMessenger.of(Get.context!).showSnackBar(snackBar);
-    });
-
-    return Container();
   }
 
   void showToast(String message) {

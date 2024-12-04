@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/preferred_size.dart';
-import 'package:flutter_getx_template/app/core/base/base_view.dart';
-import 'package:flutter_getx_template/app/modules/home/controllers/home_controller.dart';
+
 import 'package:flutter_getx_template/app/modules/main/views/main_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class LoginPage extends BaseView<HomeController> {
+class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

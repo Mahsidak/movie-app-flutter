@@ -2,9 +2,8 @@ import 'package:flutter_getx_template/app/modules/home/views/movie_details.dart'
 import 'package:get/get.dart';
 
 import '../modules/home/bindings/movie_details_binding.dart';
+import '../modules/home/viewModel/movie_details_view_model.dart';
 import '../modules/login/views/login_view.dart';
-import '/app/modules/bookmarks/bindings/bookmarks_binding.dart';
-import '/app/modules/bookmarks/views/bookmarks_view.dart';
 import '/app/modules/home/bindings/home_binding.dart';
 import '/app/modules/home/views/home_view.dart';
 import '/app/modules/main/bindings/main_binding.dart';
@@ -37,13 +36,8 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MOVIE_DETAILS,
-      page: () => MovieDetailsView(),
+      page: () => MovieDetailsView(viewModel: Get.find<MovieDetailsViewModel>()),
       binding: MovieDetailsBinding(),
-    ),
-    GetPage(
-      name: _Paths.FAVORITE,
-      page: () => BookmarksView(),
-      binding: BookmarksBinding(),
     ),
     GetPage(
       name: _Paths.SETTINGS,

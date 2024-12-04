@@ -1,40 +1,39 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_template/app/modules/bookmarks/views/bookmarks_view.dart';
-import 'package:get/get.dart';
-
-import '/app/core/base/base_view.dart';
 import '/app/modules/home/views/home_view.dart';
-import '/app/modules/main/controllers/main_controller.dart';
-import '/app/modules/main/model/menu_code.dart';
-import '/app/modules/main/views/bottom_nav_bar.dart';
-import '/app/modules/settings/views/settings_view.dart';
 import '/app/modules/search/views/search_view.dart';
+import '/app/modules/settings/views/settings_view.dart';
+import '/app/modules/main/views/bottom_nav_bar.dart';
+import '/app/modules/main/model/menu_code.dart';
 
-// ignore: must_be_immutable
-class MainView extends BaseView<MainController> {
+class MainView extends StatefulWidget {
   @override
-  PreferredSizeWidget? appBar(BuildContext context) => null;
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  MenuCode _selectedMenuCode = MenuCode.HOME;
+
+  final HomeView homeView = HomeView();
+  final SearchView searchView = SearchView();
+  SettingsView? settingsView;
 
   @override
-  Widget body(BuildContext context) {
-    return Container(
-      key: UniqueKey(),
-      child: Obx(
-        () => getPageOnSelectedMenu(controller.selectedMenuCode),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: null,
+      body: Container(
+        key: UniqueKey(),
+        child: getPageOnSelectedMenu(_selectedMenuCode),
+      ),
+      bottomNavigationBar: BottomNavBar(
+        onItemSelected: (MenuCode selectedMenu) {
+          setState(() {
+            _selectedMenuCode = selectedMenu;
+          });
+        },
       ),
     );
   }
-
-  @override
-  Widget? bottomNavigationBar() {
-    return BottomNavBar(onItemSelected: controller.onMenuSelected);
-  }
-
-  final HomeView homeView = HomeView();
-  final BookmarksView bookmarksView = BookmarksView();
-  final SearchView searchView = SearchView();
-  SettingsView? settingsView;
 
   Widget getPageOnSelectedMenu(MenuCode menuCode) {
     switch (menuCode) {
@@ -43,7 +42,7 @@ class MainView extends BaseView<MainController> {
       case MenuCode.SEARCH:
         return searchView;
       case MenuCode.BOOKMARKS:
-        return bookmarksView;
+        return homeView;
       case MenuCode.SETTINGS:
         settingsView ??= SettingsView();
         return settingsView!;

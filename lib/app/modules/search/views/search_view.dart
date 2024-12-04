@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../home/widget/item_github_project.dart';
 import '/app/core/widget/custom_app_bar.dart';
-import '/app/core/base/base_view.dart';
-import '../controllers/search_controller.dart';
 
-class SearchView extends BaseView<SearchPageController> {
+class SearchView extends StatelessWidget{
 
   String previousSearchedInput = '';
 
@@ -18,47 +15,22 @@ class SearchView extends BaseView<SearchPageController> {
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              cursorColor: Colors.black,
-              onSubmitted: (value) {
-                if (value != previousSearchedInput && value != '') {
-                  controller.searchMovies(value);
-                  previousSearchedInput = value;
-                }
-              },
-              decoration: InputDecoration(
-                hintText: 'Search movies',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                filled: true,
-                fillColor: Colors.white,
-              ),
-              style: TextStyle(color: Colors.black),
+          TextField(
+            onChanged: (text) {
+              previousSearchedInput = text;
+            },
+            decoration: InputDecoration(
+              labelText: 'Search...',
+              border: OutlineInputBorder(),
             ),
           ),
-          Expanded(
-            child: Obx(() =>
-                ListView.builder(
-                  itemCount: controller.movieList.length,
-                  itemBuilder: (context, index) {
-                    final model = controller.movieList[index];
-
-                    return MovieCard(dataModel: model);
-                  },
-                )),
-          ),
         ],
-      );
+      ),
+    );
   }
 }

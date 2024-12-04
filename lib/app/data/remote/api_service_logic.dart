@@ -1,74 +1,89 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_getx_template/app/data/model/movie_bookmark_response.dart';
+import 'dart:convert';
 
+import '../../network/serviceHandler/api_enum.dart';
+import '../../network/serviceHandler/api_service.dart';
 import '../model/movie_bookmark_request.dart';
-import '/app/core/base/base_remote_source.dart';
+import '../model/movie_bookmark_response.dart';
 import '/app/data/model/movie_list_response.dart';
 
-class APIServiceLogic extends BaseRemoteSource {
-
+class APIServiceLogic {
   static APIServiceLogic sharedInstance = APIServiceLogic();
 
-  Future<MoviesResponse> fetchTrendingMovies() {
-    var endpoint = "https://api.themoviedb.org/3/trending/all/day?api_key=3416755058040f4da2f7205c914e9a9d";
-    var dioCall = dioClient.get(endpoint);
+  Future<MoviesResponse> fetchTrendingMovies() async {
+    var endpoint =
+        "https://api.themoviedb.org/3/trending/all/day?api_key=3416755058040f4da2f7205c914e9a9d";
     try {
-      return callApiWithErrorParser(dioCall)
-          .then((response) {
-            return MoviesResponse.fromJson(response.data);
-          });
+      final response = await APIService.sharedInstance
+          .genericNetworkRequest(path: endpoint, method: RequestMethod.GET);
+
+      final jsonData = jsonDecode(response.body);
+
+      return MoviesResponse.fromJson(jsonData);
     } catch (e) {
-      rethrow;
+      print('Exception: $e');
+      throw Exception('An error occurred: $e');
     }
   }
 
-  Future<MoviesResponse> searchMovies(String query) {
+  Future<MoviesResponse> searchMovies(String query) async {
     String encodedQuery = Uri.encodeQueryComponent(query);
-    var endpoint = 'https://api.themoviedb.org/3/search/movie?query=$encodedQuery&api_key=3416755058040f4da2f7205c914e9a9d';
-    var dioCall = dioClient.get(endpoint);
+    var endpoint =
+        'https://api.themoviedb.org/3/search/movie?query=$encodedQuery&api_key=3416755058040f4da2f7205c914e9a9d';
     try {
-      return callApiWithErrorParser(dioCall)
-          .then((response) {
-        return MoviesResponse.fromJson(response.data);
-      });
+      final response = await APIService.sharedInstance
+          .genericNetworkRequest(path: endpoint, method: RequestMethod.GET);
+
+      if (response.statusCode == ResponseCode.OPERATION_SUCCESSFUL) {
+        final jsonData = jsonDecode(response.body);
+
+        return MoviesResponse.fromJson(jsonData);
+      } else {
+        print('Error: ${response.body}');
+        throw Exception('Failed to search movies: ${response.body}');
+      }
     } catch (e) {
-      rethrow;
+      print('Exception: $e');
+      throw Exception('An error occurred: $e');
     }
   }
 
-  Future<MovieBookmarkResponse> bookmarkMovie(MovieBookmarkRequest queryParam) {
-    var endpoint = "https://api.themoviedb.org/3/account/18829666/favorite";
-
-    var headers = {
-      "accept": "application/json",
-      "Authorization": "Bearer 3416755058040f4da2f7205c914e9a9d"
-    };
-
-    var options = Options(headers: headers);
-
-    var dioCall = dioClient.post(endpoint, queryParameters: queryParam.toJson(), options: options);
-
+  Future<MovieBookmarkResponse> bookmarkMovie(MovieBookmarkRequest queryParam) async {
+    var endpoint = 'https://api.themoviedb.org/3/account/18829666/favorite';
     try {
-      return callApiWithErrorParser(dioCall)
-          .then((response) {
-        return MovieBookmarkResponse.fromJson(response.data);
-      });
+      final response = await APIService.sharedInstance
+          .genericNetworkRequest(path: endpoint, method: RequestMethod.GET);
+
+      if (response.statusCode == ResponseCode.OPERATION_SUCCESSFUL) {
+        final jsonData = jsonDecode(response.body);
+
+        return MovieBookmarkResponse.fromJson(jsonData);
+      } else {
+        print('Error: ${response.body}');
+        throw Exception('Failed to bookmark movie: ${response.body}');
+      }
     } catch (e) {
-      rethrow;
+      print('Exception: $e');
+      throw Exception('An error occurred: $e');
     }
   }
 
-  Future<MoviesResponse> getBookmarkedMovies() {
-    var endpoint = "https://api.themoviedb.org/3/account/18829666/favorite/movies";
-    var dioCall = dioClient.post(endpoint);
-
+  Future<MoviesResponse> getBookmarkedMovies() async {
+    var endpoint = 'https://api.themoviedb.org/3/account/18829666/favorite/movies';
     try {
-      return callApiWithErrorParser(dioCall)
-          .then((response) {
-        return MoviesResponse.fromJson(response.data);
-      });
+      final response = await APIService.sharedInstance
+          .genericNetworkRequest(path: endpoint, method: RequestMethod.GET);
+
+      if (response.statusCode == ResponseCode.OPERATION_SUCCESSFUL) {
+        final jsonData = jsonDecode(response.body);
+
+        return MoviesResponse.fromJson(jsonData);
+      } else {
+        print('Error: ${response.body}');
+        throw Exception('Failed to get bookmarks: ${response.body}');
+      }
     } catch (e) {
-      rethrow;
+      print('Exception: $e');
+      throw Exception('An error occurred: $e');
     }
   }
 

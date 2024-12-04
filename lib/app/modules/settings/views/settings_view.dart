@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../core/widget/custom_app_bar.dart';
-import '../../main/controllers/main_controller.dart';
-import '../../main/model/menu_code.dart';
-import '/app/modules/settings/widgets/item_settings_widgets.dart';
-import '/app/core/base/base_view.dart';
-import '/app/modules/settings/controllers/settings_controller.dart';
 
-class SettingsView extends BaseView<SettingsController> {
+class SettingsView extends StatelessWidget {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
@@ -17,17 +11,14 @@ class SettingsView extends BaseView<SettingsController> {
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Column(
-      children: [
-        ItemSettings(
-          title: appLocalization.settingsLanguage,
-          prefixImage: 'ic_language.svg',
-          suffixImage: 'arrow_forward.svg',
-          onTap: _onLanguageItemClicked,
-        ),
-        _getHorizontalDivider(),
-      ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBar(context),
+      body: Column(
+        children: [
+          _getHorizontalDivider(),
+        ],
+      ),
     );
   }
 
@@ -35,50 +26,4 @@ class SettingsView extends BaseView<SettingsController> {
     return const Divider(height: 1);
   }
 
-  void _onThemeItemClicked() {
-    showToast('Theme: Development in progress');
   }
-
-  void _onLanguageItemClicked() {
-    _showLanguageSelectionDialog();
-  }
-
-  void _onFontSizeItemClicked() {
-    showToast('Font Size: Development in progress');
-  }
-
-  void _showLanguageSelectionDialog() {
-    showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Select Language"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: const Text("English"),
-                onTap: () {
-                  _changeLanguage('en');
-                },
-              ),
-              ListTile(
-                title: const Text("বাংলা"),
-                onTap: () {
-                  _changeLanguage('bn');
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  void _changeLanguage(String languageCode) {
-    Get.updateLocale(Locale(languageCode));
-    Get.find<MainController>().onMenuSelected(MenuCode.HOME);
-    Get.back();
-    showToast("Language changed to ${languageCode == 'en' ? 'English' : 'বাংলা'}");
-  }
-}

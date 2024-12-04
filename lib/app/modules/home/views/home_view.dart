@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '/app/core/base/base_view.dart';
+import '../../../data/model/movie_list_response.dart';
 import '/app/core/values/app_values.dart';
 import '/app/core/widget/custom_app_bar.dart';
 import '/app/core/widget/paging_view.dart';
-import '/app/modules/home/controllers/home_controller.dart';
+import '/app/modules/home/viewModel/home_view_model.dart';
 import '/app/modules/home/widget/item_github_project.dart';
 
-class HomeView extends BaseView<HomeController> {
+class HomeView extends StatelessWidget {
+  HomeViewModel viewModel = HomeViewModel();
+
   HomeView() {
-    controller.getMovieList();
+    viewModel.getMovieList();
   }
 
   @override
@@ -21,29 +22,33 @@ class HomeView extends BaseView<HomeController> {
   }
 
   @override
-  Widget body(BuildContext context) {
+  Widget build(BuildContext context) {
     return PagingView(
       onRefresh: () async {
-        controller.onRefreshPage();
+        viewModel.onRefreshPage();
       },
       onLoadNextPage: () {
-        controller.onLoadNextPage();
+        viewModel.onLoadNextPage();
       },
-      child: Obx(
-        () => ListView.separated(
-          shrinkWrap: true,
-          itemCount: controller.movieList.length,
-          primary: false,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            var model = controller.movieList[index];
+      child: ValueListenableBuilder<List<MovieData>>(
+        valueListenable: viewModel.movieList,
+        builder: (context, movieList, _) {
+          return ListView.separated(
+            shrinkWrap: true,
+            itemCount: movieList.length,
+            primary: false,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              var model = movieList[index];
 
-            return MovieCard(dataModel: model);
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const SizedBox(height: AppValues.margin_zero),
-        ),
+              return MovieCard(dataModel: model);
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(height: AppValues.margin_zero),
+          );
+        },
       ),
     );
   }
+
 }
